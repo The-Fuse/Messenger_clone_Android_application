@@ -3,6 +3,7 @@ package com.example.messanger
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +37,9 @@ class Login : AppCompatActivity() {
         }else{
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener {
+                    if(!it.isSuccessful){
+                   Log.d("Main","Login Failed")
+                    }
                     Toast.makeText(this,"Login Successfully",Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {

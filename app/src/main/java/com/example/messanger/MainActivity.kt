@@ -30,21 +30,24 @@ class MainActivity : AppCompatActivity() {
         val etusername:EditText = findViewById(R.id.username_registration)
         val etemail:EditText=findViewById(R.id.email_registration)
         val etpassword:EditText= findViewById(R.id.registration_password)
-        if (email.isEmpty()){
-            etemail.error="Email Required"
+        if (username.isEmpty()){
+            etusername.error="Username Required"
+            etusername.setBackgroundResource(R.drawable.input_field_error)
+        }else if (email.isEmpty()){
+            etemail.error="Required Email"
             etemail.setBackgroundResource(R.drawable.input_field_error)
         }else if (password.isEmpty()){
             etpassword.error="Required Password"
             etpassword.setBackgroundResource(R.drawable.input_field_error)
-        }else if (username.isEmpty()){
-            etusername.error="Required Username"
-            etusername.setBackgroundResource(R.drawable.input_field_error)
         }else{
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener {
                     if(!it.isSuccessful) return@addOnCompleteListener
                     Log.d("Register","Account created successfully.")
                     Toast.makeText(this,"Account created successfully",Toast.LENGTH_SHORT).show()
+                    val intent= Intent(this,Login::class.java)
+                    startActivity(intent)
+                    finish()
                 }.addOnFailureListener {
                     Toast.makeText(this,"Failed to create Account ${it.message}",Toast.LENGTH_SHORT).show()
                 }

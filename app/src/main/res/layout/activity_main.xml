@@ -20,11 +20,13 @@
         android:layout_marginRight="8dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"/>
 
     <EditText
         android:id="@+id/email_registration"
@@ -38,12 +40,14 @@
         android:background="#FFFFFF"
         android:ems="10"
         android:paddingLeft="15dp"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/username_registration"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/username_registration"
-        app:layout_constraintTop_toBottomOf="@+id/username_registration" />
+        app:layout_constraintTop_toBottomOf="@+id/username_registration"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"/>
 
     <EditText
         android:id="@+id/registration_password"
@@ -58,19 +62,25 @@
         android:layout_marginRight="8dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/email_registration"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_registration"
-        app:layout_constraintTop_toBottomOf="@+id/email_registration" />
+        app:layout_constraintTop_toBottomOf="@+id/email_registration"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"/>
 
     <Button
         android:id="@+id/register_btn"
-        android:layout_width="ma"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
-        android:text="Register"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@+id/registration_password"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/registration_password"
@@ -81,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="304dp"
-        android:text="Already an account. Login"
+        android:text="@string/already_an_account_login"
         android:textColor="#3A0343"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/register_btn"

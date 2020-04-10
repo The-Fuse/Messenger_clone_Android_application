@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:text="@string/don_t_have_an_account_create_one"
         android:textColor="#3A0343"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

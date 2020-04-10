@@ -13,6 +13,7 @@ class Login : AppCompatActivity() {
         Registration_page.setOnClickListener {
             val intent= Intent(this,MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

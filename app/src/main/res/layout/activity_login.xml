@@ -16,11 +16,12 @@
         android:layout_marginTop="88dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/input_field"
         android:ems="10"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:hint="@string/email"
+
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/input_field"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -47,6 +48,7 @@
 
     <Button
         android:id="@+id/login_btn"
+        android:background="@drawable/button_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,6 +57,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/login"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="@+id/login_password_edittext"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/login_password_edittext"

@@ -122,5 +122,15 @@
             app:layout_constraintEnd_toEndOf="@+id/username_registration"
             app:layout_constraintStart_toStartOf="@+id/username_registration"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/selectphoto_imageview"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:civ_border_width="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/selectphoto_button_register"
+            app:layout_constraintEnd_toEndOf="@+id/selectphoto_button_register"
+            app:layout_constraintStart_toStartOf="@+id/selectphoto_button_register"
+            app:layout_constraintTop_toTopOf="@+id/selectphoto_button_register" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

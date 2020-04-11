@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -42,8 +43,9 @@ class MainActivity : AppCompatActivity() {
             //perform some
             selectedPhotoUri =data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
-            val bitmapdrawable = BitmapDrawable(bitmap)
-            selectphoto_button_register.setBackgroundDrawable(bitmapdrawable)
+           selectphoto_imageview.setImageBitmap(bitmap)
+            selectphoto_button_register.alpha = 0f
+
         }
     }
     private fun performregister(){
@@ -87,12 +89,25 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d("MainActivity","Succesfully uploaded image:${it.metadata?.path}")
                 ref.downloadUrl.addOnSuccessListener {
-
+                   saveusertodatabase(it.toString())
                 }
             }
             .addOnFailureListener {
                 Log.d("MainActivity","${it.message}")
             }
     }
+    private fun saveusertodatabase(profileImageUrl: String){
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref=FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val user =User(uid,username_registration.text.toString(),profileImageUrl)
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d("MainActivity","Finally we saved user to firebase database.")
+            }
+            .addOnFailureListener {
+
+            }
+    }
 
 }
+class User(val uid:String,val username:String, val profileImageUrl:String)

@@ -70,10 +70,6 @@ class MainActivity : AppCompatActivity() {
                     Log.d("Register","Account created successfully.")
                     uploadimagetoFirebaseStorage()
                     Toast.makeText(this,"Account created successfully",Toast.LENGTH_SHORT).show()
-                    val intent=Intent(this,Login::class.java)
-                    startActivity(intent)
-                    finish()
-
                 }
                 .addOnFailureListener {
                     Toast.makeText(this,"Failed to create Account ${it.message}",Toast.LENGTH_SHORT).show()
@@ -102,6 +98,9 @@ class MainActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("MainActivity","Finally we saved user to firebase database.")
+                val intent = Intent(this,LatestMessages::class.java)
+                intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
 

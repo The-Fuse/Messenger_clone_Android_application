@@ -1,5 +1,6 @@
 package com.example.messanger
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,7 +28,8 @@ class LatestMessages : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
          when(item?.itemId){
              R.id.menu_new_message ->{
-
+                 val intent= Intent(this,NewMessage::class.java)
+                 startActivity(intent)
              }
              R.id.menu_sign_out ->{
                  FirebaseAuth.getInstance().signOut()

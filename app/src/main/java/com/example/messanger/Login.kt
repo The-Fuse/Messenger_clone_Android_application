@@ -37,9 +37,7 @@ class Login : AppCompatActivity() {
         }else{
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener {
-                    if(!it.isSuccessful){
-                   Log.d("Main","Login Failed")
-                    }
+                    if(!it.isSuccessful) return@addOnCompleteListener
                     Toast.makeText(this,"Login Successfully",Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {

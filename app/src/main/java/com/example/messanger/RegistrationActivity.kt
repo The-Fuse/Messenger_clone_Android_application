@@ -1,9 +1,7 @@
 package com.example.messanger
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,14 +12,14 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_registration.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var selectedPhotoUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_registration)
         already_accunt.setOnClickListener {
             val intent = Intent(this,Login::class.java)
             startActivity(intent)

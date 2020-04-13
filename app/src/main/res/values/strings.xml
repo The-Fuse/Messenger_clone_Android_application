@@ -11,5 +11,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="new_message">New Message</string>
     <string name="enter_message">Enter Message</string>
-    <string name="send">Send</string>20
+    <string name="send">Send</string>
+    <string name="this_is_new_message">This is new message</string>20
 </resources>

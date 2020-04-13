@@ -14,12 +14,21 @@ class Chatlog : AppCompatActivity() {
 
     }
 }
-class Chatitem: Item<ViewHolder>(){
+class ChatFromitem: Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
 
     }
 
     override fun getLayout(): Int {
+         return R.layout.chat_from_row
+    }
+}
+class Chattoitem: Item<ViewHolder>(){
+    override fun bind(viewHolder: ViewHolder, position: Int) {
 
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.chat_to_row
     }
 }

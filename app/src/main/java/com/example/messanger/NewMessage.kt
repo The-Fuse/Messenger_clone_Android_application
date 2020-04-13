@@ -1,5 +1,6 @@
 package com.example.messanger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.database.DataSnapshot
@@ -32,6 +33,11 @@ class NewMessage : AppCompatActivity() {
                     if (user!=null){
                         adapter.add(Useritem(user))
                     }
+                }
+                adapter.setOnItemClickListener { item, view ->
+                    val intent = Intent(view.context,Chatlog::class.java)
+                    startActivity(intent)
+
                 }
                 recycler_view_users.adapter=adapter
             }

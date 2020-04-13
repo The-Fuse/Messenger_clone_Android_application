@@ -3,6 +3,7 @@ package com.example.messanger
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.messanger.models.Chatmessage
 import com.example.messanger.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -19,12 +20,12 @@ import kotlinx.android.synthetic.main.chat_to_row.view.*
 
 class Chatlog : AppCompatActivity() {
     val adapter= GroupAdapter<ViewHolder>()
-    val touser :User? = null
+    var touser :User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        val touser = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
+        touser = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
          recyclerView_newmessages_chatlog.adapter=adapter
         supportActionBar?.title=touser?.username
         listenformessages()
@@ -34,19 +35,24 @@ class Chatlog : AppCompatActivity() {
     }
 
     private fun listenformessages(){
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId=FirebaseAuth.getInstance().uid
+        val toId=touser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
         ref.addChildEventListener(object:ChildEventListener{
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val chatmessage=p0.getValue(Chatmessage::class.java)
-                if (chatmessage!=null){
-                    Log.d("Main",chatmessage.text)
-                }
-                if (chatmessage.id==FirebaseAuth.getInstance().uid){
-                    val currentuser = LatestMessages.currentuser
-                    adapter.add(ChatFromitem(chatmessage.text,currentuser!!))
+                val chatmessage= p0.getValue(Chatmessage::class.java)
+                if (chatmessage != null) {
+                    Log.d("Main", chatmessage.text)}
+                if (chatmessage?.fromId==FirebaseAuth.getInstance().uid){
+                    val currentuser = LatestMessages.currentuser ?: return
+                    if (chatmessage != null) {
+                        adapter.add(ChatFromitem(chatmessage.text,currentuser))
+                    }
 
                 }else{
-                 adapter.add(Chattoitem(chatmessage.text,touser!!))
+                    if (chatmessage != null) {
+                        adapter.add(Chattoitem(chatmessage.text,touser!!))
+                    }
 
                 }
 
@@ -69,22 +75,24 @@ class Chatlog : AppCompatActivity() {
             }
         })
     }
-    class Chatmessage(val id:String,val text: String,val fromId:String,val toId:String,val timestamp:Long){
-        constructor(): this("","","","",-1)
-    }
+
     private fun performsendmessage(){
        val text= entermessage_edittext.text.toString()
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
         if (fromId==null) return
         val toId= user.uid
-        val reference=FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference=FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toreference=FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
         val chatmessage = Chatmessage(reference.key!!,text,fromId,toId,System.currentTimeMillis()/1000)
 
         reference.setValue(chatmessage)
             .addOnSuccessListener {
+                entermessage_edittext.text.clear()
+                recyclerView_newmessages_chatlog.scrollToPosition(adapter.itemCount-1)
 
             }
+        toreference.setValue(chatmessage)
 
     }
 }

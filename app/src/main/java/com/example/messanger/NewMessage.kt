@@ -3,6 +3,7 @@ package com.example.messanger
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.messanger.models.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -40,8 +41,7 @@ class NewMessage : AppCompatActivity() {
                 adapter.setOnItemClickListener { item, view ->
                     val useritem = item as Useritem
                     val intent = Intent(view.context,Chatlog::class.java)
-                    intent.putExtra(USER_KEY,useritem.user.username)
-
+                    intent.putExtra(USER_KEY,useritem.user)
                     startActivity(intent)
                     finish()
 

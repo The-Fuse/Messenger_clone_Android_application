@@ -48,7 +48,7 @@ class LatestMessages : AppCompatActivity() {
         startActivity(intent)}
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
          when(item?.itemId){
              R.id.menu_new_message ->{
                  val intent= Intent(this,NewMessage::class.java)

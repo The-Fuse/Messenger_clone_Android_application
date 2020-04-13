@@ -37,6 +37,7 @@ class NewMessage : AppCompatActivity() {
                 adapter.setOnItemClickListener { item, view ->
                     val intent = Intent(view.context,Chatlog::class.java)
                     startActivity(intent)
+                    finish()
 
                 }
                 recycler_view_users.adapter=adapter

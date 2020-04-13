@@ -55,6 +55,7 @@ class Chatlog : AppCompatActivity() {
                     }
 
                 }
+                recyclerView_newmessages_chatlog.scrollToPosition(adapter.itemCount-1)
 
             }
 

@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.messanger.models.Chatmessage
 import com.example.messanger.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -26,6 +28,14 @@ class LatestMessages : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
         recyclerview_latest_messages.adapter=adapter
+        recyclerview_latest_messages.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
+        adapter.setOnItemClickListener { item, view ->
+           val row= item as LatestMessageRow
+
+            val intent= Intent(this,Chatlog::class.java)
+            intent.putExtra(NewMessage.USER_KEY,row.chatPartenerUser)
+            startActivity(intent)
+        }
         listenForlatestMessages()
         fetchcurrentuser()
         verifyuserloggedin()
@@ -113,12 +123,34 @@ class LatestMessages : AppCompatActivity() {
     }
 }
 class LatestMessageRow(val chatMessage: Chatmessage): Item<ViewHolder>(){
+    var chatPartenerUser : User? = null
     override fun getLayout(): Int {
         return R.layout.latest_message_row
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textView_latest_message
+        viewHolder.itemView.textView_latest_message.text = chatMessage.text
+        val chatpartenerId : String
+        if (chatMessage.fromId==FirebaseAuth.getInstance().uid){
+            chatpartenerId= chatMessage.toId
+        }else{
+            chatpartenerId=chatMessage.fromId
+        }
+        val ref= FirebaseDatabase.getInstance().getReference("/users/$chatpartenerId")
+        ref.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                chatPartenerUser = p0.getValue(User::class.java)
+                viewHolder.itemView.username_textview_latestmessage.text=chatPartenerUser?.username
+                val targetimageView= viewHolder.itemView.imageView_latestmessage
+                Picasso.get().load(chatPartenerUser?.profileImageUrl).into(targetimageView)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+
+
     }
 }
 

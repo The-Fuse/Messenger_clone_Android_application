@@ -23,6 +23,9 @@ class NewMessage : AppCompatActivity() {
 
         fetchUsers()
     }
+    companion object{
+        val USER_KEY ="USER_KEY"
+    }
     private fun fetchUsers(){
         val ref=FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object :ValueEventListener {
@@ -35,7 +38,10 @@ class NewMessage : AppCompatActivity() {
                     }
                 }
                 adapter.setOnItemClickListener { item, view ->
+                    val useritem = item as Useritem
                     val intent = Intent(view.context,Chatlog::class.java)
+                    intent.putExtra(USER_KEY,useritem.user.username)
+
                     startActivity(intent)
                     finish()
 

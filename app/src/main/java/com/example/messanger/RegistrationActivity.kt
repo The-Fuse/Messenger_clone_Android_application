@@ -5,10 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import com.example.messanger.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -94,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private fun saveusertodatabase(profileImageUrl: String){
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref=FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user =User(uid,username_registration.text.toString(),profileImageUrl)
+        val user = User(uid,username_registration.text.toString(),profileImageUrl)
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("MainActivity","Finally we saved user to firebase database.")
@@ -107,7 +110,4 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-}
-class User(val uid:String,val username:String, val profileImageUrl:String){
-    constructor(): this("","","")
 }

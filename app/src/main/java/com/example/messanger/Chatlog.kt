@@ -46,12 +46,12 @@ class Chatlog : AppCompatActivity() {
                 if (chatmessage?.fromId==FirebaseAuth.getInstance().uid){
                     val currentuser = LatestMessages.currentuser ?: return
                     if (chatmessage != null) {
-                        adapter.add(ChatFromitem(chatmessage.text,currentuser))
+                        adapter.add(Chattoitem(chatmessage.text,currentuser))
                     }
 
                 }else{
                     if (chatmessage != null) {
-                        adapter.add(Chattoitem(chatmessage.text,touser!!))
+                        adapter.add(ChatFromitem(chatmessage.text,touser!!))
                     }
 
                 }

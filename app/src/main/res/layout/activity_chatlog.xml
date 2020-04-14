@@ -10,9 +10,10 @@
     <EditText
         android:id="@+id/entermessage_edittext"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#FFFFFF"
         android:ems="10"
         android:hint="@string/enter_message"
@@ -25,11 +26,11 @@
 
     <Button
         android:id="@+id/send_btn_chatlog"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/ic_send_black_24dp"
         android:textColor="#FFFFFF"
         android:textSize="15sp"

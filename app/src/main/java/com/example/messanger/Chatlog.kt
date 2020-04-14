@@ -1,5 +1,8 @@
 package com.example.messanger
 
+import android.app.ActionBar
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +31,8 @@ class Chatlog : AppCompatActivity() {
         touser = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
          recyclerView_newmessages_chatlog.adapter=adapter
         supportActionBar?.title=touser?.username
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+
         listenformessages()
         send_btn_chatlog.setOnClickListener {
             performsendmessage()

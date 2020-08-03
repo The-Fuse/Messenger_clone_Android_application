@@ -1,5 +1,5 @@
 # Messanger
-Messanger application.
+
 
 #### This is just like an clone application for whatsapp or messanger with minimum facilities.
 
